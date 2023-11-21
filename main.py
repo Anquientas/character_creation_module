@@ -1,7 +1,14 @@
+"""
+Стартовый модуль игры.
+Здесь вводится имя персонажа, его игровой класс и проводятся его тренировки.
+"""
 from random import randint
+
+from graphic_arts.start_game_banner import run_screensaver
 
 
 def attack(char_name: str, char_class: str) -> str:
+    """Функция вычисления наносимого урона."""
     if char_class == 'warrior':
         damage: int = 5 + randint(3, 5)
     elif char_class == 'mage':
@@ -12,6 +19,7 @@ def attack(char_name: str, char_class: str) -> str:
 
 
 def defence(char_name: str, char_class: str) -> str:
+    """Функция вычисления блокируемого урона."""
     if char_class == 'warrior':
         block: int = 10 + randint(5, 10)
     elif char_class == 'mage':
@@ -22,19 +30,21 @@ def defence(char_name: str, char_class: str) -> str:
 
 
 def special(char_name: str, char_class: str) -> str:
+    """Функция определения специального скила и его характеристик."""
     if char_class == 'warrior':
         number: int = 80 + 25
-        skill = f'«Выносливость {number}»'
+        skill: str = f'«Выносливость {number}»'
     elif char_class == 'mage':
         number: int = 5 + 40
-        skill = f'«Атака {number}»'
+        skill: str = f'«Атака {number}»'
     elif char_class == 'healer':
         number: int = 10 + 30
-        skill = f'«Защита {number}»'
+        skill: str = f'«Защита {number}»'
     return (f'{char_name} применил специальное умение {skill}')
 
 
 def start_training(char_name: str, char_class: str) -> str:
+    """Функция тренировки персонажа."""
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
     elif char_class == 'mage':
@@ -59,6 +69,7 @@ def start_training(char_name: str, char_class: str) -> str:
 
 
 def choice_char_class() -> str:
+    """Функция именования и выбора игрового класса персонажа."""
     approve_choice: str = ''
     char_class: str = ''
     while approve_choice != 'y':
@@ -80,7 +91,8 @@ def choice_char_class() -> str:
     return char_class
 
 
-def main() -> None:
+if __name__ == '__main__':
+    run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
     char_name: str = input('...назови себя: ')
@@ -90,6 +102,3 @@ def main() -> None:
     print('Воитель, Маг, Лекарь')
     char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
-
-
-main()
